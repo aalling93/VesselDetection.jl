@@ -1,3 +1,6 @@
+using Statistics
+
+
 """
 The two paramter (TP)-CFAR object detection method described in The State-of-the-Art in Ship Detection in Synthetic Aperture Radar imagery, D.J. Crips, 2004, in section 5.2 Adaptive threshold algorithms
 

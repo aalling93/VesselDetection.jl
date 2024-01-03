@@ -1,3 +1,6 @@
+using Statistics
+
+
 """"
 The The constant false alarm rate with convolution and pooling (CP-CFAR) object detection method described in:
 Z. Cui, H. Quan, Z. Cao, S. Xu, C. Ding and J. Wu, "SAR Target CFAR Detection Via GPU Parallel Operation," 
