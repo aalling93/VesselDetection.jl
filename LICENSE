@@ -1,5 +1,42 @@
-CC BY-NC
+# Custom Non-Commercial License (CNCL) for VesselDetection.jl
 
-Copyright (c) 2024 Kristian Aalling Soerensen
+_Version 0.0.1_
+
+**Copyright (c) 2024, Kristian Aalling Sorensen**
+
+All rights reserved.
+
+## 1. Definitions:
+
+- **"This Software"** refers to VesselDetection.jl.
+- **"Commercial Use"** is any activity that helps generate profit or financial gain, directly or indirectly.
+
+## 2. Grant of License:
+
+Subject to the terms and conditions of this License, the author, Kristian Aalling Sorensen, hereby grants you a non-exclusive, worldwide license to use, copy, modify, and distribute This Software, in source or binary forms, for non-commercial purposes only.
+
+## 3. Restrictions:
+
+- **Commercial Use Prohibited**: You may not use This Software for any Commercial Use.
+- **Company Usage**: This Software may not be used by any corporation, company, or other commercial entity.
+- **Prohibited for Certain Entities**: This Software may not be used by non-profit organizations, non-governmental organizations (NGOs), governmental entities, associations, or any similar entities, regardless of their profit status.
+- **Attribution**: You must give appropriate credit to Kristian Aalling Sorensen, provide a link to the license, and indicate if changes were made to This Software.
+- **Non-Commercial Derivatives**: Any derivative works created from This Software must also be for non-commercial purposes only and are subject to this License.
+- **No Endorsement**: This license does not grant permission to use the trade names, trademarks, service marks, or product names of the Licensor, except as required for reasonable and customary use in describing the origin of This Software and reproducing the content of the NOTICE file.
 
 
+## 4. Disclaimer of Warranty:
+
+This Software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+
+## 5. Limitation of Liability:
+
+In no event shall the Author be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of This Software, even if advised of the possibility of such damage.
+
+## 6. Termination:
+
+This License automatically terminates if you fail to comply with its terms and conditions.
+
+## 7. Miscellaneous:
+
+This License constitutes the entire agreement between the parties with respect to the use of This Software licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter.

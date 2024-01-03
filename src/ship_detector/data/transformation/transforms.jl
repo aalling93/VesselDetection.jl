@@ -40,13 +40,18 @@ function absolute(x::Vector{Matrix{Float64}})
 end
 
 # Two to Three Channel for Vector of Bands
-function two_to_three_channel(x::Vector{Matrix{Float64}}, bands=[1, 2, 2])
+function to_channels(x::Vector{Matrix{Float64}}, bands=[1, 2, 2])
     # Ensure the bands vector has at least 3 elements
     while length(bands) < 3
         push!(bands, bands[end])
     end
 
-    if length(x) >= 2
+    if length(x) == 2
+        band1 = bands[1] > 0 && bands[1] ≤ length(x) ? x[bands[1]] : zeros(size(x[1]))
+        band2 = bands[2] > 0 && bands[2] ≤ length(x) ? x[bands[2]] : zeros(size(x[1]))
+        temp = cat(band1, band2, dims=3)
+        return permutedims(temp, [3, 1, 2])  
+    elseif length(x) > 2
         band1 = bands[1] > 0 && bands[1] ≤ length(x) ? x[bands[1]] : zeros(size(x[1]))
         band2 = bands[2] > 0 && bands[2] ≤ length(x) ? x[bands[2]] : zeros(size(x[1]))
         band3 = bands[3] > 0 && bands[3] ≤ length(x) ? x[bands[3]] : zeros(size(x[1]))
@@ -57,6 +62,22 @@ function two_to_three_channel(x::Vector{Matrix{Float64}}, bands=[1, 2, 2])
     end
 
 end
+
+
+# Two to Three Channel for Vector of Bands
+function to_two_channel(x::Vector{Matrix{Float64}}, bands=[1, 2])
+    # Ensure the bands vector has at least 3 elements
+    if length(x) == 2
+        band1 = bands[1] > 0 && bands[1] ≤ length(x) ? x[bands[1]] : zeros(size(x[1]))
+        band2 = bands[2] > 0 && bands[2] ≤ length(x) ? x[bands[2]] : zeros(size(x[1]))
+        temp = cat(band1, band2, dims=3)
+        return permutedims(temp, [3, 1, 2])
+    else
+        throw(ArgumentError("Input must have 2 bands."))
+    end
+end
+
+
 # Convert to Float32 for 3D Arrays
 function to_float32(x::Array{Float64, 3})
     return Float32.(x)
