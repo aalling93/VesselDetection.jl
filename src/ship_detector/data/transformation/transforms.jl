@@ -46,12 +46,12 @@ function to_channels(x::Vector{Matrix{Float64}}, bands=[1, 2, 2])
         push!(bands, bands[end])
     end
 
-    if length(x) == 2
+    if length(bands) == 2
         band1 = bands[1] > 0 && bands[1] ≤ length(x) ? x[bands[1]] : zeros(size(x[1]))
         band2 = bands[2] > 0 && bands[2] ≤ length(x) ? x[bands[2]] : zeros(size(x[1]))
         temp = cat(band1, band2, dims=3)
         return permutedims(temp, [3, 1, 2])  
-    elseif length(x) > 2
+    elseif length(bands) > 2
         band1 = bands[1] > 0 && bands[1] ≤ length(x) ? x[bands[1]] : zeros(size(x[1]))
         band2 = bands[2] > 0 && bands[2] ≤ length(x) ? x[bands[2]] : zeros(size(x[1]))
         band3 = bands[3] > 0 && bands[3] ≤ length(x) ? x[bands[3]] : zeros(size(x[1]))
