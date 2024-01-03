@@ -46,41 +46,7 @@ function calculate_f1_score(predictions, labels, threshold::Float32=0.5)
 end
 
 
-"""
-    calculate_class_metrics(predictions, true_labels, threshold, class_label)::NamedTuple
 
-Calculate various classification metrics for a specific class label.
-
-This function computes precision, recall, F1 score, and accuracy for a given class label based on the predictions, true labels, and a specified threshold.
-
-# Arguments
-- `predictions`: Vector of predicted probabilities.
-- `true_labels`: Vector of actual labels.
-- `threshold`: Threshold for classifying predictions.
-- `class_label`: The class label for which metrics are calculated.
-
-# Returns
-- `NamedTuple`: A tuple containing precision, recall, F1 score, and accuracy.
-
-# Example
-```julia
-metrics = calculate_class_metrics(predictions, true_labels, 0.5, 1)
-```
-"""
-function calculate_class_metrics(predictions, true_labels, threshold, class_label)
-    pred_labels = predictions .> threshold
-    tp = sum((pred_labels .== class_label) .& (true_labels .== class_label))
-    fp = sum((pred_labels .== class_label) .& (true_labels .!= class_label))
-    tn = sum((pred_labels .!= class_label) .& (true_labels .!= class_label))
-    fn = sum((pred_labels .!= class_label) .& (true_labels .== class_label))
-
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
-    f1 = 2 * (precision * recall) / (precision + recall)
-    accuracy = (tp + tn) / length(true_labels)
-
-    return (precision=precision, recall=recall, f1=f1, accuracy=accuracy)
-end
 
 """
     calculate_metrics(predictions, true_labels, threshold)::NamedTuple
@@ -185,7 +151,29 @@ function evaluate_test_set_at_threshold(test_predictions, test_labels, threshold
     return (ships=ship_metrics, icebergs=iceberg_metrics)
 end
 
-# Function to calculate class metrics with positive_class as a required argument
+
+
+"""
+    calculate_class_metrics(predictions, true_labels, threshold, class_label)::NamedTuple
+
+Calculate various classification metrics for a specific class label.
+
+This function computes precision, recall, F1 score, and accuracy for a given class label based on the predictions, true labels, and a specified threshold.
+
+# Arguments
+- `predictions`: Vector of predicted probabilities.
+- `true_labels`: Vector of actual labels.
+- `threshold`: Threshold for classifying predictions.
+- `class_label`: The class label for which metrics are calculated.
+
+# Returns
+- `NamedTuple`: A tuple containing precision, recall, F1 score, and accuracy.
+
+# Example
+```julia
+metrics = calculate_class_metrics(predictions, true_labels, 0.5, 1)
+```
+"""
 function calculate_class_metrics(predictions, true_labels, threshold, class_label)
     pred_labels = predictions .> threshold
     tp = sum((pred_labels .== class_label) .& (true_labels .== class_label))

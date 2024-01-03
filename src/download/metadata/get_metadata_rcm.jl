@@ -3,7 +3,7 @@ using PyCall
 
 
 
-@pyimport eodms_rapi
+#@pyimport eodms_rapi           
 """
     download_metadata_rcm(; area, start_datetime::String, end_datetime::String, 
                            max_records::Int64, collection::String, polarization::Array{String}, 
@@ -41,7 +41,7 @@ results = download_metadata_rcm(area=my_area, start_datetime="2022-10-10", end_d
                                 product_type=["GCC", "GRD"], bean_mode="ScanSAR 50%",
                                 spatial_resolution="50", username="my_username", password="my_password", verbose=1)
 ````
-"""                          
+"""               
 function download_metadata_rcm(; area, 
     start_datetime::String="2022-10-10", 
     end_datetime::String="2022-10-11", 
@@ -66,15 +66,12 @@ function download_metadata_rcm(; area,
         "Product Type" => ("like", product_type),
         "Spatial Resolution" => ("=", spatial_resolution),
         "Polarization" => ("like", polarization),
-        "Beam Mode" => ("contains", bean_mode)  # Assuming this is what you meant instead of repeating "Beam Mode Type"
+        "Beam Mode" => ("contains", bean_mode)  
     )
     
     dates = [Dict("start" => start_time, "end" => end_time)]
 
-    # Import the Python module
-    #@pyimport pandas as pd
-    
-    #features = area, f
+
     # Create the EODMSRAPI object using Python code
     rapi = eodms_rapi.EODMSRAPI(username, password)
     # Call the search method from the Python module #filters, feats, dates, 
