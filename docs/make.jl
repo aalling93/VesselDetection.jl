@@ -1,3 +1,4 @@
+#push!(LOAD_PATH,"../src/")
 using VesselDetection
 using Documenter
 
@@ -6,14 +7,8 @@ DocMeta.setdocmeta!(VesselDetection, :DocTestSetup, :(using VesselDetection ); r
 makedocs(;
     modules=[VesselDetection],
     authors="Kristian Aalling Soerensen",
-    repo="https://github.com/aalling93/VesselDetection.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/aalling93/VesselDetection.jl",
     sitename="VesselDetection.jl",
-    format=Documenter.HTML(;
-        prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://aalling93.github.io/VesselDetection.jl",
-        edit_link="main",
-        assets=String[],
-    ),
     pages=[
         "Home" => "index.md"
     ],

@@ -1,4 +1,4 @@
-"""
+"""@autodocs
     module VesselDetection
 
 VesselDetection.jl is a sophisticated Julia module tailored for satellite-based maritime surveillance.
