@@ -9,7 +9,7 @@ Documentation for [VesselDetection](https://github.com/aalling93/VesselDetection
 ```@index
 ```
 
-# ```@autodocs
-Modules = [VesselDetection.Sensors, VesselDetection.Download]
 
-# ```
+```@autodocs
+Modules = [VesselDetection]
+```

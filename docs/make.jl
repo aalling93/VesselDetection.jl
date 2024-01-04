@@ -2,10 +2,10 @@
 using VesselDetection
 using Documenter
 
-DocMeta.setdocmeta!(VesselDetection, :DocTestSetup, :(using VesselDetection ); recursive=true)
+#DocMeta.setdocmeta!(VesselDetection, :DocTestSetup, :(using VesselDetection ); recursive=true)
 
 makedocs(;
-    modules=[VesselDetection],
+    modules=[VesselDetection, VesselDetection.Sensors, VesselDetection.Download, VesselDetection.Visualize,VesselDetection.Ship_detector],
     authors="Kristian Aalling Soerensen",
     repo="https://github.com/aalling93/VesselDetection.jl",
     sitename="VesselDetection.jl",
@@ -13,6 +13,8 @@ makedocs(;
         "Home" => "index.md"
     ],
 )
+
+
 
 deploydocs(;
     repo="github.com/aalling93/VesselDetection.jl",
