@@ -177,13 +177,10 @@ Find center locations of objects in a binary image.
 # Example
     object_centers = object_locations(binary_array)
 """
-function object_locations(image::Matrix{T}) where T <: Real
+function object_locations(image, connectivity=5)
     #objects using using label components.
     binary_array = copy(image)
-    if T!=Float64
-        binary_array = convert.(Float64,binary_array)
-    end
-    objects = Images.label_components(binary_array,bkg = trues(5,5));
+    objects = Images.label_components(binary_array,bkg = trues(connectivity,connectivity));
     #finding the center x and y coordinate for each object.
     unique_objects = unique(objects)[2:length(unique(objects))] #not counting background.
     x_coordinate = [round(Int64,Statistics.mean(first.(Tuple.(findall(x->x==j, objects))))) for j in unique_objects]
