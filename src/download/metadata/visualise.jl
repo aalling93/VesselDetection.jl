@@ -1,7 +1,5 @@
 using Plots, DataFrames, GeometryBasics
-#using GeometryTypes  # or the relevant package where Point is defined
 import GeometryBasics
-# Ensure PlotlyJS backend is active
 #plotlyjs()
 
 """

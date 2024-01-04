@@ -8,6 +8,16 @@ The `Ship_detector` module provides functionalities for transforming, loading, a
 applying various filters, performing Constant False Alarm Rate (CFAR) processing, and running machine 
 learning models for ship detection.
 
+# Overview
+
+The `Ship_detector` module integrates several components to perform ship detection:
+
+- Image processing utilities.
+- Data transformation and loading mechanisms.
+- Ship detection model implementation.
+- Filters and operations for image analysis.
+- Constant False Alarm Rate (CFAR) algorithm for ship detection.
+
 ## Components
 
 - `transformation`: Functions for image transformation and preprocessing.

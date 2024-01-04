@@ -1,5 +1,5 @@
 import Statistics
-
+using Images, ImageMorphology
 
 """"
 The The constant false alarm rate with convolution and pooling (CP-CFAR) object detection method described in:
@@ -19,8 +19,9 @@ function constant_false_alarm_rate_with_convolution_and_pooling(image::Matrix{T}
     average_pool_filter = mean_filter([2,2])
     image = conv2d(image, average_pool_filter,2, "same")
     image = two_parameter_constant_false_alarm_rate(image,background_size,guard_size,pfa)
-    image = Images.ImageMorphology.dilate(image)
-    image = Images.ImageMorphology.erode(image)
+    image = ImageMorphology.dilate(image)
+    image = ImageMorphology.erode(image)
+    #Images.Mor
     #median filter
     kernel_size = (3,3)
     image = Images.ImageFiltering.mapwindow(Statistics.median,image,kernel_size)
