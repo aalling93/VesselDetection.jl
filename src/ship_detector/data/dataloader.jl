@@ -21,16 +21,34 @@ function min_max_scale(data::AbstractArray{<:Real,3}; data_max::Real, data_min::
     return scaled_data
 end
 
+function min_max_scale(data::AbstractArray{<:Real,2}; data_max::Real, data_min::Real, to_max::Real, to_min::Real)
+    scaled_data = (data .- data_min) ./ (data_max - data_min) .* (to_max - to_min) .+ to_min
+    return scaled_data
+end
 
-#function min_max_scale(data::Array{Float32,3}; data_max::Float32, data_min::Float32, to_max::Float64, to_min::Float64)
-#    scaled_data = (data .- data_min) ./ (data_max - data_min) .* (to_max - to_min) .+ to_min
-#    return scaled_data
-#end
+function min_max_scale_adaptive(data::AbstractArray{<:Real,2}; to_max::Real, to_min::Real)
+    scaled_data = (data .- minimum(data)) ./ (maxiumum(data) - minimum(data)) .* (to_max - to_min) .+ to_min
+    return scaled_data
+end
 
-#function min_max_scale(data::Array{Float64,3}; data_max::Float64, data_min::Float64, to_max::Float64, to_min::Float64)
-#    scaled_data = (data .- data_min) ./ (data_max - data_min) .* (to_max - to_min) .+ to_min
-#    return scaled_data
-#end
+
+
+function normalize_bands(matrix::AbstractArray{<:Real,3})
+    # matrix is assumed to have shape (75, 75, 2) or similar
+    normalized = copy(matrix)  # Copying to avoid modifying the original array
+
+    for i in 1:size(matrix, 3)  # Iterating over the third dimension (bands)
+        band = matrix[:, :, i]
+        min_val = minimum(band)
+        max_val = maximum(band)
+
+        # Normalizing the band
+        normalized[:, :, i] .= (band .- min_val) ./ (max_val - min_val)
+    end
+
+    return normalized
+end
+
 
 
 
@@ -38,10 +56,9 @@ end
 function prepare_input(matrix::AbstractArray{<:Real,3})
     # scale so min max is 0 and 1 as in the training data (this is not smart, but just to show how it can be done)
     # normally, there is a global min and max for the whole dataset, but here we use the min and max of the image
-    scaled = min_max_scale(matrix, data_max=maximum(matrix[:, :, :]), data_min=minimum(matrix[:, :, :]), to_max=1.0, to_min=0.0)
+    normalized = normalize_bands(matrix)
     # reshape to 4D array (batch, height, width, channels)    
     permuted_array = permutedims(scaled[1:2, :, :], [2, 3, 1])
-    reshaped_array = reshape(permuted_array, 75, 75, 1, 2)
 
     return reshaped_array
 end
@@ -65,9 +82,7 @@ function create_dataset(json_data)
         reshaped_band_2 = reshape(band_2, (75, 75, 1))
         # Combine band_1 and band_2 into a 75x75x2 array
         combined_image = cat(reshaped_band_1, reshaped_band_2, dims=3)
-        #combined_image = [reshaped_band_1,reshaped_band_2]
-        # Store the combined image data
-        push!(images, Float32.(min_max_scale(combined_image, data_max=0.0, data_min=-50.0, to_max=1.0, to_min=0.0)))
+        push!(images, Float32.(normalize_bands(combined_image)))
         push!(labels, is_iceberg)
     end
 

@@ -79,15 +79,24 @@ The function plots metrics for ships and icebergs over varying thresholds to com
 plot_combined_metrics(metrics_vector, "accuracy")
 """
 function plot_combined_metrics(metrics_vector, metric_name)
-    @assert isa(metric_name, String) "metric_name must be a string"
+    # Initialize arrays to store metric values
+    ships_metric = []
+    icebergs_metric = []
 
-    thresholds = [m.threshold for m in metrics_vector]
-    ships_metric = [getfield(m.ships, metric_name) for m in metrics_vector]
-    icebergs_metric = [getfield(m.icebergs, metric_name) for m in metrics_vector]
+    # Extract the metric values for ships and icebergs
+    for metric in metrics_vector
+        push!(ships_metric, getfield(metric.ships, metric_name))
+        push!(icebergs_metric, getfield(metric.icebergs, metric_name))
+    end
 
-    Plots.plot(thresholds, ships_metric, label="Ships $(metric_name)", title="$(metric_name) vs Threshold")
-    Plots.plot!(thresholds, icebergs_metric, label="Icebergs $(metric_name)", xlabel="Threshold", ylabel=metric_name)
+    # Extract thresholds for x-axis
+    thresholds = [metric.threshold for metric in metrics_vector]
+
+    # Create the plot
+    plot(thresholds, ships_metric, label="Ships", title="Combined Metric Plot: " * string(metric_name), xlabel="Threshold", ylabel=string(metric_name))
+    plot!(thresholds, icebergs_metric, label="Icebergs")
 end
+
 
 
 

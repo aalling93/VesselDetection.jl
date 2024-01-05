@@ -173,7 +173,10 @@ end
 
 
 function classify(; input,model,threshold::Float64=0.25)
-    if model(input)[1].>threshold
+    # labels 1 are icebergs and 0 ships.. 
+    # values less than the threshold are therefore ships.. 
+    # 
+    if model(input)[1].<threshold
         return Dict("ship"=>true, "probability"=>model(input)[1])
     else
         return Dict("ship"=>false, "probability"=>model(input)[1])

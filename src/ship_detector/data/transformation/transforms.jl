@@ -28,6 +28,12 @@ function min_max_scale(x::Vector{Matrix{Float64}}; data_max=1.0, data_min=0.0, t
 end
 
 
+# Min-Max Scale for Matrix
+function min_max_scale_adaptive(x::Vector{Matrix{Float64}}; to_max=1.0, to_min=0.0)
+    [(to_max - to_min) * ((band .- minimum(band)) ./ (maximum(band) - minimum(band))) .+ to_min for band in x]
+end
+
+
 
 # Clip to Valid Range for Matrix
 function clip_to_valid_range(x::Vector{Matrix{Float64}}; amin=0.0, amax=1.0)

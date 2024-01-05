@@ -19,7 +19,7 @@ all processed images along the batch dimension, forming a 4-dimensional array.
 prepared_images = prepare_images([rand(64, 64), rand(64, 64)])
 ```
 """
-function prepare_images(images::Vector{Matrix{Float64}})
+function prepare_images(images::Vector{Matrix})
     # Convert to Float32 and add a singleton dimension for the channel and batch
     reshaped_images = [reshape(Float32.(image), size(image, 1), size(image, 2), 1, 1) for image in images]
     # Concatenate all images along the 4th dimension
