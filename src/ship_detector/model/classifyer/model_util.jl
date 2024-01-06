@@ -190,12 +190,12 @@ A dictionary with the classification result and the probability.
 - `ship::Bool`: Whether the input is classified as ship or not.
 - `probability::Float64`: The probability of the input not being a ship.
 
-
+# Example
+```julia
+...
+```
 """
 function classify(; input,model,threshold::Float64=0.25)
-    # labels 1 are icebergs and 0 ships.. 
-    # values less than the threshold are therefore ships.. 
-    # 
     if model(input)[1].<threshold
         return Dict("ship"=>true, "probability"=>model(input)[1])
     else

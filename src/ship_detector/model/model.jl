@@ -46,7 +46,6 @@ It is designed with extensibility in mind, allowing for future integration of ad
 and advanced analytical techniques.
 
 """
-
 module Model 
 
 include("metrics.jl")

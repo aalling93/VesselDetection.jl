@@ -93,8 +93,8 @@ function plot_combined_metrics(metrics_vector, metric_name)
     thresholds = [metric.threshold for metric in metrics_vector]
 
     # Create the plot
-    plot(thresholds, ships_metric, label="Ships", title="Combined Metric Plot: " * string(metric_name), xlabel="Threshold", ylabel=string(metric_name))
-    plot!(thresholds, icebergs_metric, label="Icebergs")
+    Plots.plot(thresholds, ships_metric, label="Ships", title="Combined Metric Plot: " * string(metric_name), xlabel="Threshold", ylabel=string(metric_name))
+    Plots.plot!(thresholds, icebergs_metric, label="Icebergs")
 end
 
 

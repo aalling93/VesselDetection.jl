@@ -69,9 +69,8 @@ all_metrics = calculate_metrics(predictions, true_labels, 0.5)
 ```
 """
 function calculate_metrics(predictions, true_labels, threshold)
-    ship_metrics = calculate_class_metrics(predictions, true_labels, threshold, 1)
-    iceberg_metrics = calculate_class_metrics(predictions, true_labels, threshold, 0)
-
+    ship_metrics = calculate_class_metrics(predictions, true_labels, threshold, 0)
+    iceberg_metrics = calculate_class_metrics(predictions, true_labels, threshold, 1)
     return (threshold=threshold, ships=ship_metrics, icebergs=iceberg_metrics)
 end
 
