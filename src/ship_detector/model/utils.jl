@@ -26,3 +26,15 @@ function prepare_images(images::Vector{Matrix})
     return cat(reshaped_images..., dims=4)
 end
 
+
+function normalize_bands(arr)
+    # arr is assumed to have shape (75, 75, 2, 1)
+    normalized = copy(arr)  # Copying to avoid modifying the original array
+    for i in 1:size(arr, 3)  # Iterating over the third dimension (bands)
+        band = arr[:, :, i, 1]
+        min_val = minimum(band)
+        max_val = maximum(band)
+        normalized[:, :, i, 1] .= (band .- min_val) ./ (max_val - min_val)
+    end
+    return Float32.(normalized)
+end

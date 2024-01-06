@@ -172,6 +172,26 @@ function load_model(model_path::String)
 end
 
 
+"""
+    classify(; input, model, threshold::Float64=0.25)
+
+Classifies the input as ship or no using the given model and threshold.
+
+This is mainly for JuliaEO2024, and assumes that the model was trained on C-CORE data.
+The model retusn a ship=True is the probability is lower than the threshold. 
+
+# Arguments
+- `input`: The input data to be classified.
+- `model`: The model used for classification.
+- `threshold`: The threshold value for classifying the input. Default is 0.25.
+
+# Returns
+A dictionary with the classification result and the probability.
+- `ship::Bool`: Whether the input is classified as ship or not.
+- `probability::Float64`: The probability of the input not being a ship.
+
+
+"""
 function classify(; input,model,threshold::Float64=0.25)
     # labels 1 are icebergs and 0 ships.. 
     # values less than the threshold are therefore ships.. 
