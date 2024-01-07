@@ -12,6 +12,10 @@ works/*
 Dont_Use/*
 Dont_Use
 
+data
+data/
+data/*
+
 figures
 figures/*
 figures/Notebooks
