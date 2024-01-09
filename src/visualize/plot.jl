@@ -123,7 +123,7 @@ function plot_image_with_boxes(; image_matrix, bbox_dict, confidence_threshold=0
     @assert 0 <= confidence_threshold <= 1 "Confidence threshold must be between 0 and 1"
     @assert all(∈(keys(bbox_dict)), ["x", "y", "width", "height", "probability"]) "bbox_dict must contain keys: 'x', 'y', 'width', 'height', 'probability'"
     
-    fig = Makie.Figure(resolution = (600, 400))
+    fig = Makie.Figure(size = (600, 400))
     ax = Makie.Axis(fig[1, 1], title = "Image with applied transforms")
     
     # Plot the image
