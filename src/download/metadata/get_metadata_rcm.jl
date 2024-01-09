@@ -1,9 +1,5 @@
 
-using PyCall
-
-
-
-#@pyimport eodms_rapi           
+        
 """
     download_metadata_rcm(; area, start_datetime::String, end_datetime::String, 
                            max_records::Int64, collection::String, polarization::Array{String}, 
@@ -55,31 +51,7 @@ function download_metadata_rcm(; area,
     password::String = "password",
     verbose::Int = 1)  # Adjust product type if needed
     
-    @assert !isempty(username) && !isempty(password) "Username and password cannot be empty"
-    @assert !isempty(start_datetime) && !isempty(end_datetime) "Start and end datetimes cannot be empty"
-    @assert max_records > 0 "Max records must be a positive integer"
-    # Define the base URL for the Sentinel-1 data collection
-    start_time = to_rcm_time(start_datetime);
-    end_time = to_rcm_time(end_datetime);
 
-    filters = Dict(
-        "Product Type" => ("like", product_type),
-        "Spatial Resolution" => ("=", spatial_resolution),
-        "Polarization" => ("like", polarization),
-        "Beam Mode" => ("contains", bean_mode)  
-    )
-    
-    dates = [Dict("start" => start_time, "end" => end_time)]
-
-
-    # Create the EODMSRAPI object using Python code
-    rapi = eodms_rapi.EODMSRAPI(username, password)
-    # Call the search method from the Python module #filters, feats, dates, 
-    rapi.search(collection = "RCMImageProducts", filters = filters, features = [],dates = dates, max_results=max_records)
-    # Get the results from the search
-    res = rapi.get_results("full")
-    rapi.clear_results()
-    
-    return res
+    return nothing
 end
 
